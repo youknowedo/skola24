@@ -20,9 +20,7 @@ test('getClasses', async (t) => {
 	);
 
 	const classes = await session.getClasses();
-
 	t.assert(classes);
-	await t.notThrowsAsync(session.getClasses);
 });
 
 test('getSchedule', async (t) => {

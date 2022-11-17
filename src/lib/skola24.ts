@@ -1,9 +1,4 @@
-import {
-	default as fetch,
-	default as NodeFetch,
-	RequestInfo,
-	RequestInit,
-} from 'node-fetch';
+import { default as fetch, RequestInfo, RequestInit } from 'node-fetch';
 
 import { ClassesData, KeyData, Response, ScheduleData } from '../types/skola24';
 
@@ -35,7 +30,7 @@ export class Skola24 {
 		hostName: string,
 		unit = 0
 	): Promise<Skola24> => {
-		const connectionResponse = await NodeFetch(
+		const connectionResponse = await fetch(
 			'https://web.skola24.se/timetable/timetable-viewer/'
 		);
 		const headers = connectionResponse.headers;
@@ -54,7 +49,7 @@ export class Skola24 {
 		url: RequestInfo,
 		init?: RequestInit | undefined
 	): Promise<Response<T>> => {
-		const response = await NodeFetch(url, {
+		const response = await fetch(url, {
 			...init,
 			headers: {
 				Accept: 'application/json',
@@ -96,7 +91,7 @@ export class Skola24 {
 			'https://web.skola24.se/api/get/timetable/render/key'
 		);
 
-		return response.data?.key;
+		return response.data.key;
 	};
 
 	public getClasses = async () => {
@@ -121,7 +116,7 @@ export class Skola24 {
 			}
 		);
 
-		return response.data?.classes;
+		return response.data.classes;
 	};
 
 	public getSchedule = async (
@@ -159,7 +154,7 @@ export class Skola24 {
 			}
 		);
 
-		return await response.data;
+		return response.data;
 	};
 }
 
