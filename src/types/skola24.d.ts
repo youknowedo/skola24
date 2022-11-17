@@ -1,6 +1,8 @@
 import { Response as NodeResponse } from 'node-fetch';
 
-type Skola24Object = {
+import { BoxList, LessonInfo, LineList, TextList } from './schedule';
+
+export type Skola24Object = {
 	id: string | null;
 	groupGuid: string;
 	groupName: string;
@@ -21,7 +23,7 @@ export class Response<T> extends NodeResponse {
 	public data: T;
 }
 
-type KeyData = {
+export type KeyData = {
 	key: string;
 };
 

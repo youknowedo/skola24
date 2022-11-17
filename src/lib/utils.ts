@@ -1,3 +1,4 @@
+import { Lesson, LessonInfo } from '../types';
 import { ScheduleData } from '../types/skola24';
 
 export const ParseLesson = (lesson: LessonInfo, week: number): Lesson => {

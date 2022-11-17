@@ -1,4 +1,4 @@
-type TextList = {
+export type TextList = {
 	x: number;
 	y: number;
 	fColor: string;
@@ -11,7 +11,7 @@ type TextList = {
 	type: string;
 };
 
-type BoxList = {
+export type BoxList = {
 	x: number;
 	y: number;
 	width: number;
@@ -24,7 +24,7 @@ type BoxList = {
 	lessonGuids?: string[];
 };
 
-type LineList = {
+export type LineList = {
 	p1x: number;
 	p1y: number;
 	p2x: number;
@@ -35,7 +35,7 @@ type LineList = {
 	type: string;
 };
 
-type LessonInfo = {
+export type LessonInfo = {
 	guidId: string;
 	texts: string[];
 	timeStart: string;

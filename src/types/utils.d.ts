@@ -1,9 +1,9 @@
-type LColors = {
+export type LColors = {
 	background: string;
 	text: string;
 };
 
-type Lesson = {
+export type Lesson = {
 	id: string;
 	colors?: LColors;
 

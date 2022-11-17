@@ -1,15 +1,15 @@
-type UnitsData = {
+export type UnitsData = {
 	errors: unknown;
 	validationErrors: unknown;
 	getTimetableViewerUnitsResponse: GetTimetableViewerUnitsResponse;
 };
 
-type GetTimetableViewerUnitsResponse = {
+export type GetTimetableViewerUnitsResponse = {
 	hostName: string;
 	units: Unit[];
 };
 
-type Unit = {
+export type Unit = {
 	unitGuid: string;
 	unitId: string;
 	allowCalendarExport: boolean;
@@ -18,7 +18,7 @@ type Unit = {
 	anonymous: Anonymous;
 };
 
-type Anonymous = {
+export type Anonymous = {
 	students: boolean;
 	classes: boolean;
 	groups: boolean;
