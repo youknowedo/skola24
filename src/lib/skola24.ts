@@ -60,6 +60,7 @@ export class Skola24 {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 				'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
+				Cookie: `ASP.NET_SessionId=${this._cookies.SessionId}; TS01fb1e5e=${this._cookies.TS01fb1e5e}`,
 			},
 		});
 
@@ -92,12 +93,7 @@ export class Skola24 {
 
 	public getKey = async () => {
 		const response = await this.fetch<KeyData>(
-			'https://web.skola24.se/api/get/timetable/render/key',
-			{
-				headers: {
-					cookie: `ASP.NET_SessionId=${this._cookies.SessionId}; TS01fb1e5e=${this._cookies.TS01fb1e5e}`,
-				},
-			}
+			'https://web.skola24.se/api/get/timetable/render/key'
 		);
 
 		return response.data?.key;
@@ -107,9 +103,6 @@ export class Skola24 {
 		const response = await this.fetch<ClassesData>(
 			'https://web.skola24.se/api/get/timetable/selection',
 			{
-				headers: {
-					cookie: `ASP.NET_SessionId=${this._cookies.SessionId}; TS01fb1e5e=${this._cookies.TS01fb1e5e}`,
-				},
 				method: 'POST',
 				body: JSON.stringify({
 					hostname: this.hostName,
@@ -133,8 +126,8 @@ export class Skola24 {
 
 	public getSchedule = async (
 		selectionGuid: string,
+		week: number,
 		day: 0 | 1 | 2 | 3 | 4 | 5 = 0,
-		week = 42,
 		year = new Date().getFullYear()
 	) => {
 		const key = await this.getKey();
@@ -142,9 +135,6 @@ export class Skola24 {
 		const response = await this.fetch<ScheduleData>(
 			'https://web.skola24.se/api/render/timetable',
 			{
-				headers: {
-					cookie: `ASP.NET_SessionId=${this._cookies.SessionId}; TS01fb1e5e=${this._cookies.TS01fb1e5e}`,
-				},
 				method: 'POST',
 				body: JSON.stringify({
 					renderKey: key,

@@ -9,14 +9,9 @@ test('connect', async (t) => {
 
 	const key = await session.getKey();
 
-	console.log('HostName: ' + session.hostName);
-	console.log('UnitGuid: ' + session.unitGuid);
-	console.log('SessionId: ' + session.cookies.SessionId);
-	console.log('TS01fb1e5e: ' + session.cookies.TS01fb1e5e);
-	console.log('Key: ' + key);
-
 	t.assert(session.cookies.SessionId);
 	t.assert(session.cookies.TS01fb1e5e);
+	t.assert(key);
 });
 
 test('getClasses', async (t) => {
@@ -26,12 +21,8 @@ test('getClasses', async (t) => {
 
 	const classes = await session.getClasses();
 
-	console.log('Classes:');
-	classes?.map((c) => {
-		console.log('    ' + c.groupName);
-	});
-
 	t.assert(classes);
+	await t.notThrowsAsync(session.getClasses);
 });
 
 test('getSchedule', async (t) => {
@@ -40,22 +31,9 @@ test('getSchedule', async (t) => {
 	);
 
 	const lessons = await session.getSchedule(
-		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi'
+		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
+		42
 	);
-
-	console.log('Lessons:');
-	lessons?.lessonInfo.map((l) => {
-		console.log(
-			'    ' +
-				l.texts[0] +
-				' from ' +
-				l.timeStart +
-				' to ' +
-				l.timeEnd +
-				' on ' +
-				l.dayOfWeekNumber
-		);
-	});
 
 	t.assert(lessons);
 });
