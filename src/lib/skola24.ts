@@ -5,7 +5,7 @@ import { UnitsData } from '../types/units';
 
 import { Cookies, getCookies } from './cookies';
 
-class Skola24 {
+export class Skola24 {
 	private _hostName: string;
 	public get hostName(): string {
 		return this._hostName;
@@ -158,5 +158,3 @@ class Skola24 {
 		return response.data;
 	};
 }
-
-export default Skola24;

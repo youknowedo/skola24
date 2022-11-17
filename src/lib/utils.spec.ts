@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import Skola24 from './skola24';
+import { Skola24 } from './skola24';
 import { ParseSchedule } from './utils';
 
 test('Parse schedule', async (t) => {

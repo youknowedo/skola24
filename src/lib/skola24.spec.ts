@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import Skola24 from './skola24';
+import { Skola24 } from './skola24';
 
 test('connect', async (t) => {
 	const session = await Skola24.connect(

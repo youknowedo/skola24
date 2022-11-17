@@ -1,2 +1,4 @@
-export * from './lib/skola24';
+import { Skola24 } from './lib/skola24';
+export default Skola24;
+
 export * from './lib/utils';
