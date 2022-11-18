@@ -1,9 +1,8 @@
 import { default as fetch, RequestInfo, RequestInit } from 'node-fetch';
 
-import { ClassesData, KeyData, Response, ScheduleData } from '../types/skola24';
-import { UnitsData } from '../types/units';
-
 import { Cookies, getCookies } from './cookies';
+import { ClassesData, KeyData, Response, ScheduleData } from './types/skola24';
+import { UnitsData } from './types/units';
 
 export class Skola24 {
 	private _hostName: string;

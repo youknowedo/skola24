@@ -20,7 +20,7 @@ export type Skola24Object = {
 };
 
 export class Response<T> extends NodeResponse {
-	public data: T;
+	public data!: T;
 }
 
 export type KeyData = {
