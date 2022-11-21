@@ -1,13 +1,7 @@
-import { default as fetch, RequestInfo, RequestInit } from 'node-fetch';
+import fetch, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { Cookies, getCookies } from './cookies';
-import {
-	ClassesData,
-	KeyData,
-	RData,
-	Response,
-	ScheduleData,
-} from './types/skola24';
+import { ClassesData, KeyData, Response, ScheduleData } from './types/skola24';
 import { UnitsData } from './types/units';
 
 export class Skola24 {
@@ -51,12 +45,12 @@ export class Skola24 {
 		);
 	};
 
-	public fetch = async <T>(
-		url: RequestInfo,
-		init?: RequestInit | undefined
-	): Promise<Response<T>> => {
-		const response = await fetch(url, {
-			...init,
+	public fetch = async <T, D = unknown>(
+		url: string,
+		config?: AxiosRequestConfig<D> | undefined
+	): Promise<AxiosResponse<T, D>> => {
+		return fetch(url, {
+			...config,
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -64,14 +58,13 @@ export class Skola24 {
 				Cookie: `ASP.NET_SessionId=${this._cookies.SessionId}; TS01fb1e5e=${this._cookies.TS01fb1e5e}`,
 			},
 		});
-
-		return Object.assign({}, response, {
-			data: ((await response.json()) as RData<never>).data,
-		});
 	};
 
-	public static getUnits = async (hostName: string, cookies: Cookies) => {
-		const response = await fetch(
+	public static getUnits = async (
+		hostName: string,
+		cookies: Cookies
+	): Promise<UnitsData> => {
+		const response = await fetch<Response<UnitsData>>(
 			'https://web.skola24.se/api/services/skola24/get/timetable/viewer/units',
 			{
 				headers: {
@@ -81,15 +74,15 @@ export class Skola24 {
 					Cookie: `ASP.NET_SessionId=${cookies.SessionId}; TS01fb1e5e=${cookies.TS01fb1e5e}`,
 				},
 				method: 'POST',
-				body: JSON.stringify({
+				data: {
 					getTimetableViewerUnitsRequest: {
 						hostName,
 					},
-				}),
+				},
 			}
 		);
 
-		return ((await response.json()) as RData<UnitsData>).data;
+		return response.data.data;
 	};
 
 	public getKey = async () => {
@@ -105,7 +98,7 @@ export class Skola24 {
 			'https://web.skola24.se/api/get/timetable/selection',
 			{
 				method: 'POST',
-				body: JSON.stringify({
+				data: {
 					hostname: this.hostName,
 					unitGuid: this.unitGuid,
 					filters: {
@@ -118,7 +111,7 @@ export class Skola24 {
 						subject: false,
 						teacher: false,
 					},
-				}),
+				},
 			}
 		);
 
@@ -137,7 +130,7 @@ export class Skola24 {
 			'https://web.skola24.se/api/render/timetable',
 			{
 				method: 'POST',
-				body: JSON.stringify({
+				data: {
 					renderKey: key,
 					host: this.hostName,
 					unitGuid: this.unitGuid,
@@ -156,7 +149,7 @@ export class Skola24 {
 					privateFreeTextMode: null,
 					privateSelectionMode: false,
 					customerKey: '',
-				}),
+				},
 			}
 		);
 
