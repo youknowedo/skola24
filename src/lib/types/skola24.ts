@@ -23,6 +23,10 @@ export class Response<T> extends NodeResponse {
 	public data!: T;
 }
 
+export type RData<T> = {
+	data: T;
+};
+
 export type KeyData = {
 	key: string;
 };

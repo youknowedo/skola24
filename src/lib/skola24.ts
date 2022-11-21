@@ -1,7 +1,13 @@
 import { default as fetch, RequestInfo, RequestInit } from 'node-fetch';
 
 import { Cookies, getCookies } from './cookies';
-import { ClassesData, KeyData, Response, ScheduleData } from './types/skola24';
+import {
+	ClassesData,
+	KeyData,
+	RData,
+	Response,
+	ScheduleData,
+} from './types/skola24';
 import { UnitsData } from './types/units';
 
 export class Skola24 {
@@ -60,7 +66,7 @@ export class Skola24 {
 		});
 
 		return Object.assign({}, response, {
-			data: (await response.json()).data,
+			data: ((await response.json()) as RData<never>).data,
 		});
 	};
 
@@ -83,7 +89,7 @@ export class Skola24 {
 			}
 		);
 
-		return (await response.json()).data as UnitsData;
+		return ((await response.json()) as RData<UnitsData>).data;
 	};
 
 	public getKey = async () => {
