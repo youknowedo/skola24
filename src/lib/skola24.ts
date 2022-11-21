@@ -86,15 +86,15 @@ export class Skola24 {
 	};
 
 	public getKey = async () => {
-		const response = await this.fetch<KeyData>(
+		const response = await this.fetch<Response<KeyData>>(
 			'https://web.skola24.se/api/get/timetable/render/key'
 		);
 
-		return response.data.key;
+		return response.data.data.key;
 	};
 
 	public getClasses = async () => {
-		const response = await this.fetch<ClassesData>(
+		const response = await this.fetch<Response<ClassesData>>(
 			'https://web.skola24.se/api/get/timetable/selection',
 			{
 				method: 'POST',
@@ -115,7 +115,7 @@ export class Skola24 {
 			}
 		);
 
-		return response.data.classes;
+		return response.data.data.classes;
 	};
 
 	public getSchedule = async (
@@ -126,7 +126,7 @@ export class Skola24 {
 	) => {
 		const key = await this.getKey();
 
-		const response = await this.fetch<ScheduleData>(
+		const response = await this.fetch<Response<ScheduleData>>(
 			'https://web.skola24.se/api/render/timetable',
 			{
 				method: 'POST',
@@ -153,6 +153,6 @@ export class Skola24 {
 			}
 		);
 
-		return response.data;
+		return response.data.data;
 	};
 }

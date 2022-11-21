@@ -31,11 +31,15 @@ export const getCookies = (
 
 export const getCookieValue = (cookieHeader: string[], param: string) => {
 	const parts = cookieHeader
-		.join()
-		.match(new RegExp(`(^|, )${param}=([^;]+); `));
+		.join(',')
+		.match(new RegExp(`(^|,)${param}=([^;]+);`));
 
 	if (!parts)
-		throw new Error(`Headers did not include a Set-Cookie for "${param}"`);
+		throw new Error(
+			`Headers did not include a Set-Cookie for "${param}"  "${cookieHeader.join(
+				'; '
+			)}"`
+		);
 
 	return parts[2].toString();
 };

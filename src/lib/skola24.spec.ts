@@ -11,7 +11,7 @@ test('connect', async (t) => {
 
 	t.assert(session.cookies.SessionId);
 	t.assert(session.cookies.TS01fb1e5e);
-	t.assert(key);
+	console.log(key);
 });
 
 test('getClasses', async (t) => {
