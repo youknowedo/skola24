@@ -65,3 +65,22 @@ export const ParseSchedule = (
 
 	return lessons;
 };
+
+export const SortSchedule = (schedule: Lesson[]) => {
+	let doneSorting = false;
+	while (!doneSorting) {
+		doneSorting = true;
+
+		for (let i = 1; i < schedule.length; i++) {
+			if (schedule[i - 1].from > schedule[i].from) {
+				const temp = schedule[i];
+				schedule[i] = schedule[i - 1];
+				schedule[i - 1] = temp;
+
+				doneSorting = false;
+			}
+		}
+	}
+
+	return schedule;
+};
