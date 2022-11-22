@@ -84,3 +84,34 @@ export const SortSchedule = (schedule: Lesson[]) => {
 
 	return schedule;
 };
+
+export const GroupLessons = (schedule: (Lesson | undefined)[]): Lesson[][] => {
+	const groupedSchedule: Lesson[][] = [];
+
+	for (let i = 0; i < schedule.length; i++) {
+		const currentLesson = schedule[i];
+
+		if (currentLesson) {
+			const lessonGroup: Lesson[] = [currentLesson];
+
+			for (let j = 0; j < schedule.length; j++) {
+				if (i != j) {
+					const iteratedLesson = schedule[j];
+
+					if (
+						iteratedLesson &&
+						iteratedLesson.from >= currentLesson.from &&
+						iteratedLesson.from < currentLesson.to
+					) {
+						lessonGroup.push(iteratedLesson);
+						schedule[j] = undefined;
+					}
+				}
+			}
+
+			groupedSchedule.push(lessonGroup);
+		}
+	}
+
+	return groupedSchedule;
+};
