@@ -1,7 +1,12 @@
 import test from 'ava';
 
 import { Skola24 } from './skola24';
-import { GroupLessons, ParseSchedule, SortSchedule } from './utils';
+import {
+	GroupLessons,
+	ParseLesson,
+	ParseSchedule,
+	SortSchedule,
+} from './utils';
 
 test('Parse schedule', async (t) => {
 	const session = await Skola24.connect(
@@ -17,6 +22,9 @@ test('Parse schedule', async (t) => {
 		t.fail('Could not get schedule');
 		return;
 	}
+
+	const lesson = ParseLesson(schedule.lessonInfo[0], 42);
+	t.assert(lesson);
 
 	let lessons = ParseSchedule(schedule, 42);
 	t.assert(lessons);
