@@ -32,7 +32,7 @@ test('Parse schedule', async (t) => {
 	lessons = ParseSchedule(schedule, 47, 2022, true);
 	t.assert(lessons);
 
-	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 22, 11, 30).valueOf());
+	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 23, 11, 30).valueOf());
 });
 
 test('Sort schedule', async (t) => {
