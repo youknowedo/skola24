@@ -10,8 +10,8 @@ test('Parse schedule', async (t) => {
 
 	const schedule = await session.getSchedule(
 		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
-		42,
-		1
+		47,
+		3
 	);
 	if (!schedule) {
 		t.fail('Could not get schedule');
@@ -23,6 +23,8 @@ test('Parse schedule', async (t) => {
 
 	lessons = ParseSchedule(schedule, 42, true);
 	t.assert(lessons);
+
+	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 23, 11, 30).valueOf());
 });
 
 test('Sort schedule', async (t) => {

@@ -1,12 +1,13 @@
 import { Lesson, LessonInfo } from './types';
 import { ScheduleData } from './types/skola24';
 
-export const ParseLesson = (lesson: LessonInfo, week: number): Lesson => {
-	const currentDate = new Date();
-	const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
-
-	const days = (week - 1) * 7 + lesson.dayOfWeekNumber;
-	const day = new Date(startOfYear.getFullYear(), 0, days);
+export const ParseLesson = (
+	lesson: LessonInfo,
+	week: number,
+	year = new Date().getFullYear()
+): Lesson => {
+	const days = week * 7 - 1 + lesson.dayOfWeekNumber;
+	const day = new Date(year, 1, days);
 
 	return {
 		id: lesson.guidId,
