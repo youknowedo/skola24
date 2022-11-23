@@ -26,13 +26,13 @@ test('Parse schedule', async (t) => {
 	const lesson = ParseLesson(schedule.lessonInfo[0], 42);
 	t.assert(lesson);
 
-	let lessons = ParseSchedule(schedule, 42);
+	let lessons = ParseSchedule(schedule, 47);
 	t.assert(lessons);
 
-	lessons = ParseSchedule(schedule, 42, 2022, true);
+	lessons = ParseSchedule(schedule, 47, 2022, true);
 	t.assert(lessons);
 
-	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 23, 11, 30).valueOf());
+	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 22, 11, 30).valueOf());
 });
 
 test('Sort schedule', async (t) => {

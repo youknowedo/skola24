@@ -6,8 +6,8 @@ export const ParseLesson = (
 	week: number,
 	year = new Date().getFullYear()
 ): Lesson => {
-	const days = week * 7 - 1 + lesson.dayOfWeekNumber;
-	const day = new Date(year, 1, days);
+	const days = (week - 1) * 7 + 1 + lesson.dayOfWeekNumber;
+	const day = new Date(year, 0, days);
 
 	return {
 		id: lesson.guidId,
