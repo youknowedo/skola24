@@ -52,6 +52,7 @@ export const ParseLessonWithColors = (
 export const ParseSchedule = (
 	schedule: ScheduleData,
 	week: number,
+	year: number,
 	withColors = false
 ): Lesson[] => {
 	const lessons: Lesson[] = [];
@@ -60,7 +61,7 @@ export const ParseSchedule = (
 		lessons.push(
 			withColors
 				? ParseLessonWithColors(lesson, schedule, week)
-				: ParseLesson(lesson, week)
+				: ParseLesson(lesson, week, year)
 		);
 	}
 
