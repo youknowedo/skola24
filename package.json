@@ -1,6 +1,6 @@
 {
   "name": "skola24",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "A simple wrapper for the obscure undocumented Skola24 API",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
