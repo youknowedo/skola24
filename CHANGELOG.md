@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/fenwikk/skola24/compare/v1.1.1...v1.1.2) (2022-11-23)
+
 ### [1.1.1](https://github.com/fenwikk/skola24/compare/v1.0.12...v1.1.1) (2022-11-22)
 
 ### [1.0.12](https://github.com/fenwikk/skola24/compare/v1.0.11...v1.0.12) (2022-11-22)
