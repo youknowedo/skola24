@@ -29,9 +29,10 @@ export const ParseLesson = (
 export const ParseLessonWithColors = (
 	lesson: LessonInfo,
 	schedule: ScheduleData,
-	week: number
+	week: number,
+	year = new Date().getFullYear()
 ): Lesson => {
-	const parsedLesson = ParseLesson(lesson, week);
+	const parsedLesson = ParseLesson(lesson, week, year);
 
 	for (const block of schedule.boxList) {
 		if (block.lessonGuids) {
@@ -52,7 +53,7 @@ export const ParseLessonWithColors = (
 export const ParseSchedule = (
 	schedule: ScheduleData,
 	week: number,
-	year: number,
+	year = new Date().getFullYear(),
 	withColors = false
 ): Lesson[] => {
 	const lessons: Lesson[] = [];
