@@ -35,3 +35,10 @@ export type ScheduleData = {
 	lineList: LineList[];
 	lessonInfo: LessonInfo[];
 };
+
+export type SchoolYear = {
+	data: {
+		schoolYearStart: Date;
+		schoolYearEnd: Date;
+	};
+};

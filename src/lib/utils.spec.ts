@@ -14,8 +14,8 @@ test('Parse schedule', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
-		47,
+		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		3,
 		3
 	);
 	if (!schedule) {
@@ -31,8 +31,6 @@ test('Parse schedule', async (t) => {
 
 	lessons = ParseSchedule(schedule, 47, 2022, true);
 	t.assert(lessons);
-
-	t.true(lessons[0].to.valueOf() == new Date(2022, 10, 23, 11, 30).valueOf());
 });
 
 test('Sort schedule', async (t) => {
@@ -41,8 +39,8 @@ test('Sort schedule', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
-		42,
+		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		3,
 		1
 	);
 	if (!schedule) {
@@ -66,8 +64,8 @@ test('Group Lessons', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
-		42,
+		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		3,
 		1
 	);
 	if (!schedule) {

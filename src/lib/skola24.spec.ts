@@ -29,9 +29,21 @@ test('getSchedule', async (t) => {
 	);
 
 	const lessons = await session.getSchedule(
-		'MTJhNTBiNjktNjhhZS1mMTNhLWEzYjEtNGM2NGZhZmE1ZDhi',
-		42
+		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		3
 	);
 
 	t.assert(lessons);
+	t.assert(lessons.lessonInfo);
+});
+
+test('getSchoolYear', async (t) => {
+	const session = await Skola24.connect(
+		'goteborgstekniskacollege.skola24.se'
+	);
+
+	const schoolYear = await session.getSchoolYear(session.cookies);
+
+	console.log(schoolYear);
+	t.assert(schoolYear);
 });

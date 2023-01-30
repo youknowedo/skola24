@@ -1,7 +1,13 @@
 import fetch, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { Cookies, getCookies } from './cookies';
-import { ClassesData, KeyData, Response, ScheduleData } from './types/skola24';
+import {
+	ClassesData,
+	KeyData,
+	Response,
+	ScheduleData,
+	SchoolYear,
+} from './types/skola24';
 import { UnitsData } from './types/units';
 
 export class Skola24 {
@@ -137,7 +143,7 @@ export class Skola24 {
 					startDate: null,
 					endDate: null,
 					blackAndWhite: false,
-					width: 418,
+					width: 365,
 					height: 550,
 					selectionType: 0,
 					selection: selectionGuid,
@@ -150,6 +156,23 @@ export class Skola24 {
 					privateSelectionMode: false,
 					customerKey: '',
 				},
+			}
+		);
+
+		return response.data.data;
+	};
+
+	public getSchoolYear = async (cookies: Cookies) => {
+		const response = await fetch<Response<SchoolYear>>(
+			'https://web.skola24.se/api/get/timetable/school/year',
+			{
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					'X-Scope': '8a22163c-8662-4535-9050-bc5e1923df48',
+					Cookie: `ASP.NET_SessionId=${cookies.SessionId}; TS01fb1e5e=${cookies.TS01fb1e5e}`,
+				},
+				method: 'POST',
 			}
 		);
 
