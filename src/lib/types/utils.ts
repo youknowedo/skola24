@@ -12,6 +12,6 @@ export type Lesson = {
 	room: string;
 
 	dayOfWeek: number;
-	from: Date;
-	to: Date;
+	from: string;
+	to: string;
 };

@@ -38,7 +38,7 @@ export type ScheduleData = {
 
 export type SchoolYear = {
 	data: {
-		schoolYearStart: Date;
-		schoolYearEnd: Date;
+		schoolYearStart: string;
+		schoolYearEnd: string;
 	};
 };

@@ -19,10 +19,10 @@ export const ParseLesson = (
 		dayOfWeek: lesson.dayOfWeekNumber,
 		from: new Date(
 			day.getTime() + Date.parse(`1970-01-01T${lesson.timeStart}.000Z`)
-		),
+		).toISOString(),
 		to: new Date(
 			day.getTime() + Date.parse(`1970-01-01T${lesson.timeEnd}.000Z`)
-		),
+		).toISOString(),
 	};
 };
 
