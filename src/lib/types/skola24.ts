@@ -29,6 +29,28 @@ export type ClassesData = {
 	classes: Skola24Object[];
 };
 
+export type ScheduleRequestData = {
+	renderKey: string;
+	host: string;
+	unitGuid: string;
+	schoolYear: string;
+	startDate: any;
+	endDate: any;
+	scheduleDay: number;
+	blackAndWhite: boolean;
+	width: number;
+	height: number;
+	selectionType: number;
+	selection: string;
+	showHeader: boolean;
+	periodText: string;
+	week: number;
+	year: number;
+	privateFreeTextMode: any;
+	privateSelectionMode: boolean;
+	customerKey: string;
+};
+
 export type ScheduleData = {
 	textList: TextList[];
 	boxList: BoxList[];
@@ -37,8 +59,22 @@ export type ScheduleData = {
 };
 
 export type SchoolYear = {
-	data: {
-		schoolYearStart: string;
-		schoolYearEnd: string;
-	};
+	error: unknown;
+	data: Data;
+	exception: unknown;
+	validation: unknown[];
+	sessionExpires: unknown;
+	needSessionRefresh: boolean;
 };
+
+export interface Data {
+	activeSchoolYears: ActiveSchoolYear[];
+	useSchoolYearsFeatures: boolean;
+}
+
+export interface ActiveSchoolYear {
+	guid: string;
+	name: string;
+	from: string;
+	to: string;
+}

@@ -14,7 +14,7 @@ test('Parse schedule', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		'YzBkYWI3MDAtZTNlOC1mZDBmLWFkNjktNzZhMWQzYjJiMjA1',
 		3,
 		3
 	);
@@ -22,14 +22,15 @@ test('Parse schedule', async (t) => {
 		t.fail('Could not get schedule');
 		return;
 	}
+	console.log('bal', schedule);
 
-	const lesson = ParseLesson(schedule.lessonInfo[0], 42);
+	const lesson = ParseLesson(schedule.lessonInfo[0], 5);
 	t.assert(lesson);
 
-	let lessons = ParseSchedule(schedule, 47);
+	let lessons = ParseSchedule(schedule, 5);
 	t.assert(lessons);
 
-	lessons = ParseSchedule(schedule, 47, 2022, true);
+	lessons = ParseSchedule(schedule, 5, 2023, true);
 	t.assert(lessons);
 });
 
@@ -39,8 +40,8 @@ test('Sort schedule', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
-		3,
+		'YzBkYWI3MDAtZTNlOC1mZDBmLWFkNjktNzZhMWQzYjJiMjA1',
+		5,
 		1
 	);
 	if (!schedule) {
@@ -48,7 +49,7 @@ test('Sort schedule', async (t) => {
 		return;
 	}
 
-	let lessons = ParseSchedule(schedule, 42);
+	let lessons = ParseSchedule(schedule, 5);
 	t.assert(lessons);
 
 	lessons = SortSchedule(lessons);
@@ -64,7 +65,7 @@ test('Group Lessons', async (t) => {
 	);
 
 	const schedule = await session.getSchedule(
-		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
+		'YzBkYWI3MDAtZTNlOC1mZDBmLWFkNjktNzZhMWQzYjJiMjA1',
 		3,
 		1
 	);

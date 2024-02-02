@@ -1,4 +1,4 @@
-import { AxiosResponseHeaders } from 'axios';
+import { AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 
 export type Cookies = {
 	SessionId: string;
@@ -6,13 +6,7 @@ export type Cookies = {
 };
 
 export const getCookies = (
-	headers:
-		| AxiosResponseHeaders
-		| Partial<
-				Record<string, string> & {
-					'set-cookie'?: string[] | undefined;
-				}
-		  >
+	headers: RawAxiosResponseHeaders | AxiosResponseHeaders
 ): Cookies => {
 	const cookieHeader = headers['set-cookie'];
 	if (!cookieHeader || typeof cookieHeader[0] != 'string')

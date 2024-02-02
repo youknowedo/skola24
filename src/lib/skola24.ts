@@ -6,6 +6,7 @@ import {
 	KeyData,
 	Response,
 	ScheduleData,
+	ScheduleRequestData,
 	SchoolYear,
 } from './types/skola24';
 import { UnitsData } from './types/units';
@@ -37,7 +38,7 @@ export class Skola24 {
 		unit = 0
 	): Promise<Skola24> => {
 		const connectionResponse = await fetch(
-			'https://web.skola24.se/timetable/timetable-viewer/'
+			`https://web.skola24.se/timetable/timetable-viewer/${hostName}/school`
 		);
 		const headers = connectionResponse.headers;
 
@@ -127,35 +128,38 @@ export class Skola24 {
 	public getSchedule = async (
 		selectionGuid: string,
 		week: number,
-		day: 0 | 1 | 2 | 3 | 4 | 5 = 0,
-		year = new Date().getFullYear()
+		day: 0 | 1 | 2 | 3 | 4 | 5 = 0
 	) => {
 		const key = await this.getKey();
+
+		const requestData: ScheduleRequestData = {
+			blackAndWhite: false,
+			customerKey: '',
+			endDate: null,
+			height: 550,
+			host: this.hostName,
+			periodText: '',
+			privateFreeTextMode: null,
+			privateSelectionMode: false,
+			renderKey: key,
+			scheduleDay: day,
+			schoolYear: (await this.getSchoolYear(this.cookies))
+				.activeSchoolYears[0].guid,
+			selection: selectionGuid,
+			selectionType: 0,
+			showHeader: false,
+			startDate: null,
+			unitGuid: this.unitGuid,
+			width: 365,
+			week,
+			year: new Date().getFullYear(),
+		};
 
 		const response = await this.fetch<Response<ScheduleData>>(
 			'https://web.skola24.se/api/render/timetable',
 			{
 				method: 'POST',
-				data: {
-					renderKey: key,
-					host: this.hostName,
-					unitGuid: this.unitGuid,
-					startDate: null,
-					endDate: null,
-					blackAndWhite: false,
-					width: 365,
-					height: 550,
-					selectionType: 0,
-					selection: selectionGuid,
-					showHeader: false,
-					periodText: '',
-					scheduleDay: day,
-					week,
-					year,
-					privateFreeTextMode: null,
-					privateSelectionMode: false,
-					customerKey: '',
-				},
+				data: requestData,
 			}
 		);
 
@@ -163,8 +167,8 @@ export class Skola24 {
 	};
 
 	public getSchoolYear = async (cookies: Cookies) => {
-		const response = await fetch<Response<SchoolYear>>(
-			'https://web.skola24.se/api/get/timetable/school/year',
+		const response = await fetch<SchoolYear>(
+			'https://web.skola24.se/api/get/active/school/years',
 			{
 				headers: {
 					Accept: 'application/json',
@@ -173,6 +177,10 @@ export class Skola24 {
 					Cookie: `ASP.NET_SessionId=${cookies.SessionId}; TS01fb1e5e=${cookies.TS01fb1e5e}`,
 				},
 				method: 'POST',
+				data: {
+					hostName: this.hostName,
+					checkSchoolYearsFeatures: false,
+				},
 			}
 		);
 

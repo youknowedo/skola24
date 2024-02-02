@@ -28,10 +28,8 @@ test('getSchedule', async (t) => {
 		'goteborgstekniskacollege.skola24.se'
 	);
 
-	const lessons = await session.getSchedule(
-		'MDdmYzcyNjctNDI0MS1mY2U2LWI2M2EtNzAxYjZlYmY2NzY2',
-		3
-	);
+	const classes = await session.getClasses();
+	const lessons = await session.getSchedule(classes[0].groupGuid, 5);
 
 	t.assert(lessons);
 	t.assert(lessons.lessonInfo);
@@ -44,6 +42,5 @@ test('getSchoolYear', async (t) => {
 
 	const schoolYear = await session.getSchoolYear(session.cookies);
 
-	console.log(schoolYear);
 	t.assert(schoolYear);
 });
