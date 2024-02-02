@@ -35,6 +35,17 @@ test('getSchedule', async (t) => {
 	t.assert(lessons.lessonInfo);
 });
 
+test('getSchedule with signature', async (t) => {
+	const session = await Skola24.connect(
+		'goteborgstekniskacollege.skola24.se'
+	);
+
+	const signature = await session.getSignature('2d8hq2pm');
+	const lessons = await session.getSchedule(signature, 5);
+
+	t.assert(lessons);
+});
+
 test('getSchoolYear', async (t) => {
 	const session = await Skola24.connect(
 		'goteborgstekniskacollege.skola24.se'

@@ -7,7 +7,8 @@ import {
 	Response,
 	ScheduleData,
 	ScheduleRequestData,
-	SchoolYear,
+	SchoolYearData,
+	SignatureData,
 } from './types/skola24';
 import { UnitsData } from './types/units';
 
@@ -100,6 +101,20 @@ export class Skola24 {
 		return response.data.data.key;
 	};
 
+	public getSignature = async (signature: string) => {
+		const response = await this.fetch<Response<SignatureData>>(
+			'https://web.skola24.se/api/encrypt/signature',
+			{
+				method: 'POST',
+				data: {
+					signature,
+				},
+			}
+		);
+
+		return response.data.data.signature;
+	};
+
 	public getClasses = async () => {
 		const response = await this.fetch<Response<ClassesData>>(
 			'https://web.skola24.se/api/get/timetable/selection',
@@ -167,7 +182,7 @@ export class Skola24 {
 	};
 
 	public getSchoolYear = async (cookies: Cookies) => {
-		const response = await fetch<SchoolYear>(
+		const response = await fetch<Response<SchoolYearData>>(
 			'https://web.skola24.se/api/get/active/school/years',
 			{
 				headers: {

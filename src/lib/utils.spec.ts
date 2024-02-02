@@ -22,7 +22,6 @@ test('Parse schedule', async (t) => {
 		t.fail('Could not get schedule');
 		return;
 	}
-	console.log('bal', schedule);
 
 	const lesson = ParseLesson(schedule.lessonInfo[0], 5);
 	t.assert(lesson);
