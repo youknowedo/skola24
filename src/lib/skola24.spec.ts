@@ -1,6 +1,7 @@
 import test from 'ava';
 
 import { Skola24 } from './skola24';
+import { SelectionType } from './types';
 
 test('connect', async (t) => {
 	const session = await Skola24.connect(
@@ -41,9 +42,15 @@ test('getSchedule with signature', async (t) => {
 	);
 
 	const signature = await session.getSignature('2d8hq2pm');
-	const lessons = await session.getSchedule(signature, 5);
+	const lessons = await session.getSchedule(
+		signature,
+		5,
+		0,
+		SelectionType.ID
+	);
 
 	t.assert(lessons);
+	t.assert(lessons.lessonInfo);
 });
 
 test('getSchoolYear', async (t) => {

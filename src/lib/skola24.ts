@@ -8,6 +8,7 @@ import {
 	ScheduleData,
 	ScheduleRequestData,
 	SchoolYearData,
+	SelectionType,
 	SignatureData,
 } from './types/skola24';
 import { UnitsData } from './types/units';
@@ -143,7 +144,8 @@ export class Skola24 {
 	public getSchedule = async (
 		selectionGuid: string,
 		week: number,
-		day: 0 | 1 | 2 | 3 | 4 | 5 = 0
+		day: 0 | 1 | 2 | 3 | 4 | 5 = 0,
+		selectionType = SelectionType.CLASS
 	) => {
 		const key = await this.getKey();
 
@@ -154,14 +156,16 @@ export class Skola24 {
 			height: 550,
 			host: this.hostName,
 			periodText: '',
-			privateFreeTextMode: null,
-			privateSelectionMode: false,
+			privateFreeTextMode:
+				selectionType == SelectionType.ID ? false : null,
+			privateSelectionMode:
+				selectionType == SelectionType.ID ? null : false,
 			renderKey: key,
 			scheduleDay: day,
 			schoolYear: (await this.getSchoolYear(this.cookies))
 				.activeSchoolYears[0].guid,
 			selection: selectionGuid,
-			selectionType: 0,
+			selectionType: selectionType,
 			showHeader: false,
 			startDate: null,
 			unitGuid: this.unitGuid,

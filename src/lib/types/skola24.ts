@@ -44,16 +44,23 @@ export type ScheduleRequestData = {
 	blackAndWhite: boolean;
 	width: number;
 	height: number;
-	selectionType: number;
+	selectionType: SelectionType;
 	selection: string;
 	showHeader: boolean;
 	periodText: string;
 	week: number;
 	year: number;
-	privateFreeTextMode: unknown;
-	privateSelectionMode: boolean;
+	privateFreeTextMode: null | false;
+	privateSelectionMode: null | false;
 	customerKey: string;
 };
+
+export enum SelectionType {
+	ID = 4,
+	ROOM = 3,
+	TEACHER = 7,
+	CLASS = 0,
+}
 
 export type ScheduleData = {
 	textList: TextList[];
