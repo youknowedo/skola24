@@ -7,7 +7,7 @@ export const ParseLesson = (
 	year = new Date().getFullYear()
 ): Lesson => {
 	const day = new Date(year, 0, 1 + (week - 1) * 7);
-	day.setDate(day.getDate() + (1 - day.getDay() + lesson.dayOfWeekNumber));
+	day.setDate(day.getDate() + (2 - day.getDay() + lesson.dayOfWeekNumber));
 
 	return {
 		id: lesson.guidId,
