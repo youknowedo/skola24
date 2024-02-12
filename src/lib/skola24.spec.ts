@@ -30,7 +30,7 @@ test('getSchedule', async (t) => {
 	);
 
 	const classes = await session.getClasses();
-	const lessons = await session.getSchedule(classes[0].groupGuid, 5);
+	const lessons = await session.getSchedule(classes[1].groupGuid, 5);
 
 	t.assert(lessons);
 	t.assert(lessons.lessonInfo);
