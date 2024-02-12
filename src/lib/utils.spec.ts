@@ -73,7 +73,7 @@ test('Group Lessons', async (t) => {
 		return;
 	}
 
-	const lessons = ParseSchedule(schedule, 42);
+	const lessons = ParseSchedule(schedule, 3);
 
 	const groupedLessons = GroupLessons(lessons);
 	t.assert(groupedLessons);
